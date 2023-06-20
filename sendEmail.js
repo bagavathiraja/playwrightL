@@ -15,7 +15,7 @@ export default async (reportData, capability) => {
             auth: {
                 // pass secrets from environment variables, do not store secrets in the source code
                 user: "bagavathiraja200@gmail.com",
-                pass: "bsjqjxqsirvircja"
+                pass: "//app password"
             }
         },
         // Message configuration: https://nodemailer.com/message/
