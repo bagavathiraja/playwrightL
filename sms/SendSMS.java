@@ -20,7 +20,8 @@ public class SendSMS {
 		.when()
 		.post("https://esbuat.mmfsl.com/mahindrafinance/uat/crm/smsapi/sms")
 		.then()
-		.log().all();
-	    
+		.log().all()
+		.assertThat().statusCode(200)
+		.body("httpMessage", equalTo("Success")); 
 	}
 }
