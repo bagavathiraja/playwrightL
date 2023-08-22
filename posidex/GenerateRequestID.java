@@ -13,8 +13,9 @@ public class GenerateRequestID {
 		.when()
 		.post("posidex_dedupe/generaterequestid")
 		.then()
-		.log().all();
-	    
-	}
-
+		.log().all()
+		.assertThat().statusCode(200)
+		.body("Seq_No", instanceOf(Integer.class))
+		.body("Seq_No.toString().length()", equalTo(8));             
+	}	
 }
