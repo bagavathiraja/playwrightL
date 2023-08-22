@@ -4,6 +4,8 @@ import io.restassured.RestAssured;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
+import java.util.List;
+
 
 public class CreateCase {
 	
@@ -47,7 +49,8 @@ public class CreateCase {
 		.when()
 		.post("https://esbuat.mmfsl.com/mahindrafinance/uat/crm/casecreate")
 		.then()
-		.log().all();
-	    
+		.log().all().body("esbResponse.response.ErrorDetails", instanceOf(List.class))
+        .body("esbResponse.header.serviceName", instanceOf(String.class));
+			    
 	}
 }
