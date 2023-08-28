@@ -1,0 +1,70 @@
+import http from 'k6/http';
+import { sleep } from 'k6';
+
+export default function(){
+  namelength();
+  locationlength();
+}
+function namelength() {
+  
+  let currentName = "";
+  let acceptedLength = 0;
+
+  while (true) {
+    const payload = {
+      id: 1,
+      name: currentName,
+      location: 'Nellai'
+    };
+
+    const res = http.post('http://localhost:3000/users', JSON.stringify(payload), {
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    //console.log(`Name: ${currentName} | Status code: ${res.status}`);
+
+    if (res.status === 400) {
+      console.log(`Maximum accepted length ID: ${acceptedLength}`);
+      break;
+    }
+
+    acceptedLength = currentName.length ;
+    currentName += 'a';
+
+    sleep(1);
+  }
+}
+function locationlength() {
+  
+  let currentLocation = "";
+  let acceptedLength = 0;
+
+  while (true) {
+    const payload = {
+      id: 1,
+      name: 'bagavathi',
+      location: currentLocation
+    };
+
+    const res = http.post('http://localhost:3000/users', JSON.stringify(payload), {
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    //console.log(`Name: ${currentLocation} | Status code: ${res.status}`);
+
+    if (res.status === 400) {
+      console.log(`Maximum accepted length location: ${acceptedLength}`);
+      break;
+    }
+    acceptedLength = currentLocation.length ;
+    currentLocation += 'a';
+    sleep(1);
+  }
+}
+
+
+
+
+
+
+
